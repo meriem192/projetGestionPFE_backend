@@ -25,6 +25,8 @@ public class Enseignant extends Utilisateur {
     )
     private List<EnseignantJury> enseignantsJury = new ArrayList<>();
 
+    @ManyToMany(mappedBy = "enseignants")
+    private List<Comite> comites = new ArrayList<>();
 
 
 }

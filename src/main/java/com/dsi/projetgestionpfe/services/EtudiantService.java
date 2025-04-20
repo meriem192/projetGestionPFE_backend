@@ -10,12 +10,7 @@ public interface EtudiantService {
     Etudiant getEtudiantById(Long id);
     List<Etudiant> getAllEtudiants();
     Etudiant updateEtudiant(Etudiant etudiant);
-    boolean deleteEtudiant(Long id);
-
-    //methodes supp
-    Rapport deposerRapport(Long etudiantId, String titre, byte[] contenu);
-    LettreAffectation deposerLettreAffectation(Long etudiantId, String entreprise, byte[] contenu);
-
+    void deleteEtudiant(Long id);
 
     //gestion binomes
     DemandeBinome envoyerDemandeBinome(Long etudiantEmetteurId, Long etudiantRecepteurId);

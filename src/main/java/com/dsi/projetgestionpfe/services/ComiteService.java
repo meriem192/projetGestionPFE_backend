@@ -10,7 +10,7 @@ public interface ComiteService {
     Comite getComiteById(long id);
     Comite createComite(Comite comite);
     Comite updateComite(Comite comite);
-    boolean deleteComite(long id);
+    void deleteComite(long id);
 
     //gestion enseignants
     boolean addEnseignantToComite(Long comiteId, Long enseignantId);

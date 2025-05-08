@@ -7,14 +7,12 @@ import java.util.List;
 
 public interface EtudiantService {
     Etudiant createEtudiant(Etudiant etudiant);
-    Etudiant getEtudiantById(Long id);
+    Etudiant getEtudiantById(int id);
     List<Etudiant> getAllEtudiants();
     Etudiant updateEtudiant(Etudiant etudiant);
-    void deleteEtudiant(Long id);
+    void deleteEtudiant(int id);
     List<Etudiant> findByParcours(Parcours parcours);
-    DemandeBinome envoyerDemandeBinome(Long etudiantEmetteurId, Long etudiantRecepteurId);
-    boolean repondreDemandeBinome(LocalDate date, boolean acceptee);
-    List<DemandeBinome> consulterDemandesRecues(Long etudiantId);
+
 
 
 }

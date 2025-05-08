@@ -22,7 +22,7 @@ public class Pfe {
 
     @OneToMany(mappedBy = "pfe")
     private List<Document> documents;
-
+    private String sujet;
     private Statut statut;
 
     

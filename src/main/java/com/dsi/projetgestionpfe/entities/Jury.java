@@ -17,7 +17,7 @@ import java.util.List;
 public class Jury{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private int id;
     @ElementCollection
     @CollectionTable(
             name = "jury_enseignants",

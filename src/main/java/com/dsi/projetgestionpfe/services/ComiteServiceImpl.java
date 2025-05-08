@@ -29,14 +29,29 @@ public class ComiteServiceImpl implements ComiteService{
 
     @Override
     public Comite createComite(Comite comite) {
-        return comiteRepository.save(comite);
-    }
+
+        if (comite.getNom() == null) {
+            throw new IllegalArgumentException("Le nom du comité ne peut pas être vide.");
+        }
+
+        if (comite.getEnseignants() == null) {
+            throw new IllegalArgumentException("Un comité doit avoir au moins un enseignant.");
+        }
+
+        return comiteRepository.save(comite);    }
 
     @Override
     public Comite updateComite(Comite comite) {
-        Optional<Comite>comiteOptional=comiteRepository.findById(comite.getId());
-        if(comiteOptional.isPresent()){
-            Comite comiteToUpdate=comiteOptional.get();
+        Optional<Comite> comiteOptional = comiteRepository.findById(comite.getId());
+        if (comiteOptional.isPresent()) {
+            Comite comiteToUpdate = comiteOptional.get();
+            if (comite.getNom() == null) {
+                throw new IllegalArgumentException("Le nom du comité ne peut pas être vide.");
+            }
+            if (comite.getEnseignants() == null) {
+                throw new IllegalArgumentException("Le comité doit avoir au moins un enseignant.");
+            }
+
             comiteToUpdate.setNom(comite.getNom());
             comiteToUpdate.setEnseignants(comite.getEnseignants());
             return comiteRepository.save(comiteToUpdate);
@@ -46,35 +61,13 @@ public class ComiteServiceImpl implements ComiteService{
 
     @Override
     public void deleteComite(long id) {
-        if(comiteRepository.existsById(id)){
-            comiteRepository.deleteById(id);
+        if (!comiteRepository.existsById(id)) {
+            throw new IllegalArgumentException("Le comité avec l'ID " + id + " n'existe pas.");
         }
+        comiteRepository.deleteById(id);
     }
 
-    @Override
-    public boolean addEnseignantToComite(Long comiteId, Long enseignantId) {
-        Enseignant enseignant=enseignantRepository.findById(enseignantId).orElse(null);
-        Comite comite=comiteRepository.findById(comiteId).orElse(null);
-        if(comite.getEnseignants().contains(enseignant)){
-            return false;
-        }
-        comite.getEnseignants().add(enseignant);
-        enseignant.getComites().add(comite);
-        comiteRepository.save(comite);
-        return true;
 
-    }
 
-    @Override
-    public boolean removeEnseignantFromComite(Long comiteId, Long enseignantId) {
-        Enseignant enseignant=enseignantRepository.findById(enseignantId).orElse(null);
-        Comite comite=comiteRepository.findById(comiteId).orElse(null);
-        if(!comite.getEnseignants().contains(enseignant)){
-            return false;
-        }
-        comite.getEnseignants().remove(enseignant);
-        enseignant.getComites().remove(comite);
-        comiteRepository.save(comite);
-        return true;
-    }
+
 }

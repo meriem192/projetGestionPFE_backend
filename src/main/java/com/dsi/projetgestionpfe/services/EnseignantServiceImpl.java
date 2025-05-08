@@ -29,73 +29,52 @@ public class EnseignantServiceImpl implements EnseignantService {
     }
 
     @Override
-    public Enseignant getEnseignantById(long id) {
+    public Enseignant getEnseignantById(int id) {
         return enseignantRepository.findById(id).orElse(null);
     }
 
     @Override
     public Enseignant updateEnseignant(Enseignant enseignant) {
+        if (enseignant.getNom() == null) {
+            throw new IllegalArgumentException("Le nom de l'enseignant ne peut pas être vide.");
+        }
+        if (enseignant.getEmail() == null) {
+            throw new IllegalArgumentException("L'email de l'enseignant ne peut pas être vide.");
+        }
+
         Optional<Enseignant> enseignantOpt = enseignantRepository.findById(enseignant.getId());
         if (enseignantOpt.isPresent()) {
-            enseignantOpt.get().setNom(enseignant.getNom());
-            enseignantOpt.get().setPrenom(enseignant.getPrenom());
-            enseignantOpt.get().setEmail(enseignant.getEmail());
-            enseignantOpt.get().setPassword(enseignant.getPassword());
-            enseignantOpt.get().setSpecialite(enseignant.getSpecialite());
-            enseignantOpt.get().setComites(enseignant.getComites());
-            return enseignantRepository.save(enseignantOpt.get());
-        }
-        return null;
-    }
+            Enseignant enseignantToUpdate = enseignantOpt.get();
+            enseignantToUpdate.setNom(enseignant.getNom());
+            enseignantToUpdate.setPrenom(enseignant.getPrenom());
+            enseignantToUpdate.setEmail(enseignant.getEmail());
+            enseignantToUpdate.setPassword(enseignant.getPassword());
+            enseignantToUpdate.setSpecialite(enseignant.getSpecialite());
+            enseignantToUpdate.setComites(enseignant.getComites());
 
-    @Override
-    public void deleteEnseignant(long id) {
-        if (enseignantRepository.existsById(id)) {
-            enseignantRepository.deleteById(id);
-        }
-    }
-
-    @Override
-    public boolean validerEncadrement(Long enseignantId, Long demandeId, boolean isValide, String commentaire) {
-        DemandeEncadrement demande = demandeEncadrementRepository.findById(demandeId)
-                .orElse(null);
-
-        if (demande == null) {
-            return false;
-        }
-
-        if (demande.getEnseignant().getId()!=enseignantId) {
-            return false;
-        }
-
-        if (isValide) {
-            demande.setStatutDemande(Statut.Accepte);
+            return enseignantRepository.save(enseignantToUpdate);
         } else {
-            demande.setStatutDemande(Statut.Refuse);
-            demande.setCommentaire(commentaire);
+            throw new IllegalArgumentException("L'enseignant avec l'ID " + enseignant.getId() + " n'existe pas.");
         }
-
-        demandeEncadrementRepository.save(demande);
-
-        return true;
     }
 
     @Override
-    public boolean evaluerRapport(Long enseignantId, Long rapportId, double note, String commentaire) {
-        Optional<Rapport> rapportOpt = rapportRepository.findById(rapportId);
+    public void deleteEnseignant(int id) {
+        Optional<Enseignant> enseignantOpt = enseignantRepository.findById(id);
+        if (enseignantOpt.isPresent()) {
+            // Vérification de l'existence de données associées (ex: rapports ou demandes d'encadrement)
+            if (!demandeEncadrementRepository.findByEnseignantId(id).isEmpty()) {
+                throw new IllegalStateException("L'enseignant a des demandes d'encadrement et ne peut pas être supprimé.");
+            }
+            if (!rapportRepository.findByEnseignantId(id).isEmpty()) {
+                throw new IllegalStateException("L'enseignant a des rapports et ne peut pas être supprimé.");
+            }
 
-        if (rapportOpt.isEmpty()) {
-            return false;
+            enseignantRepository.deleteById(id);
+        } else {
+            throw new IllegalArgumentException("L'enseignant avec l'ID " + id + " n'existe pas.");
         }
-
-        Rapport rapport = rapportOpt.get();
-        rapport.setNote(note);
-        rapport.setCommentaire(commentaire);
-        rapportRepository.save(rapport);
-        return true;
     }
-
-
 
 
     }

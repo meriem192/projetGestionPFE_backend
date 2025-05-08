@@ -26,14 +26,17 @@ public class JuryServiceImpl implements JuryService {
     }
 
     @Override
-    public Jury getJuryById(long id) {
+    public Jury getJuryById(int id) {
         return juryRepository.findById(id).orElse(null);
     }
 
     @Override
     public Jury createJury(Jury jury) {
-        return juryRepository.save(jury);
-    }
+        if (jury.getEnseignantsJury().isEmpty()) {
+            throw new RuntimeException("Le jury doit contenir au moins un enseignant.");
+        }
+
+        return juryRepository.save(jury);    }
 
     @Override
     public Jury updateJury(Jury jury) {
@@ -48,59 +51,12 @@ public class JuryServiceImpl implements JuryService {
     }
 
     @Override
-    public void deleteJury(long id) {
+    public void deleteJury(int id) {
         if (juryRepository.existsById(id)) {
             juryRepository.deleteById(id);
         }
     }
 
-    @Override
-    public boolean addEnseignantToJury(long juryId, long enseignantId, Qualificatif qualificatif) {
-        Jury jury = juryRepository.findById(juryId).orElse(null);
-        if (jury == null || !enseignantRepository.existsById(enseignantId)) {
-            return false;
-        }
-
-        Enseignant enseignant = enseignantRepository.findById(enseignantId).orElse(null);
-        if (enseignant == null) {
-            return false;
-        }
-        EnseignantJury enseignantJury = new EnseignantJury();
-        enseignantJury.setQualificateur(qualificatif);
-        jury.getEnseignantsJury().add(enseignantJury);
-
-        juryRepository.save(jury);
-        return true;
-    }
 
 
-    @Override
-    public boolean removeEnseignantFromJury(long juryId, long enseignantId) {
-        return false;
-    }
-
-    @Override
-    public List<Enseignant> getEnseignantsByJury(long juryId) {
-        return List.of();
-    }
-
-    @Override
-    public List<Enseignant> getEnseignantsByQualificatif(Qualificatif qualificatif) {
-        return List.of();
-    }
-
-    @Override
-    public boolean updateQualificatif(long juryId, long enseignantId, Qualificatif newQualificatif) {
-        return false;
-    }
-
-    @Override
-    public List<Jury> getJurysByEnseignant(long enseignantId) {
-        return List.of();
-    }
-
-    @Override
-    public boolean validateJuryComposition(long juryId) {
-        return false;
-    }
 }

@@ -8,11 +8,9 @@ import java.util.List;
 
 public interface EnseignantService {
     List<Enseignant> getEnseignants();
-    Enseignant getEnseignantById(long id);
+    Enseignant getEnseignantById(int id);
     Enseignant updateEnseignant(Enseignant enseignant);
-    void deleteEnseignant(long id);
+    void deleteEnseignant(int id);
 
-    boolean validerEncadrement(Long enseignantId, Long demandeId, boolean isValide, String commentaire);
-    boolean evaluerRapport(Long enseignantId, Long rapportId, double note, String commentaire);
 
 }

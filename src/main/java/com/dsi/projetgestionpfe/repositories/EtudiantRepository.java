@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface EtudiantRepository extends JpaRepository<Etudiant, Long> {
+public interface EtudiantRepository extends JpaRepository<Etudiant, Integer> {
     List<Etudiant> findByParcours(Parcours parcours);
+    Etudiant findByEmail(String email);
 }

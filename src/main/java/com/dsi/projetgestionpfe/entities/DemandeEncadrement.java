@@ -1,11 +1,15 @@
 package com.dsi.projetgestionpfe.entities;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
+
 import java.time.LocalDate;
 
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class DemandeEncadrement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

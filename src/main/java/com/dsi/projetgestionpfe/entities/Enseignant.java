@@ -16,8 +16,6 @@ import java.util.List;
 @NoArgsConstructor
 public class Enseignant extends Utilisateur {
     private String specialite;
-    @OneToMany(mappedBy = "enseignant")
-    private List<Feedback> feedbacks;
     @ElementCollection
     @CollectionTable(
             name = "jury_enseignants",

@@ -43,7 +43,6 @@ public class EnseignantServiceImpl implements EnseignantService {
             enseignantOpt.get().setPassword(enseignant.getPassword());
             enseignantOpt.get().setSpecialite(enseignant.getSpecialite());
             enseignantOpt.get().setComites(enseignant.getComites());
-            enseignantOpt.get().setFeedbacks(enseignant.getFeedbacks());
             return enseignantRepository.save(enseignantOpt.get());
         }
         return null;
@@ -70,9 +69,9 @@ public class EnseignantServiceImpl implements EnseignantService {
         }
 
         if (isValide) {
-            demande.setStatutDemande(Statut.Acceptee);
+            demande.setStatutDemande(Statut.Accepte);
         } else {
-            demande.setStatutDemande(Statut.Refusee);
+            demande.setStatutDemande(Statut.Refuse);
             demande.setCommentaire(commentaire);
         }
 
@@ -97,14 +96,6 @@ public class EnseignantServiceImpl implements EnseignantService {
     }
 
 
-    @Override
-        public List<Rapport> getRapportsAEvaluer ( long enseignantId){
-        return rapportRepository.findRapportsNonEvaluesByEnseignantId(enseignantId);
-        }
 
-        @Override
-        public List<Etudiant> getEtudiantsEncadres ( long enseignantId){
-            return etudiantRepository.findByEnseignantId(enseignantId);
 
-        }
     }

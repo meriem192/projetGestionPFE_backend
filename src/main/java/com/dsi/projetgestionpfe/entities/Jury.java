@@ -24,6 +24,7 @@ public class Jury{
             joinColumns = @JoinColumn(name = "jury_id")
     )
     private List<EnseignantJury> enseignantsJury = new ArrayList<>();
-
+    @OneToMany(mappedBy = "jury")
+    private List<Pfe> pfe;
 
 }

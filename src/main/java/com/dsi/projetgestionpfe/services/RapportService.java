@@ -1,8 +1,5 @@
 package com.dsi.projetgestionpfe.services;
 
-import com.dsi.projetgestionpfe.entities.Etudiant;
-import com.dsi.projetgestionpfe.entities.Feedback;
-import com.dsi.projetgestionpfe.entities.LettreAffectation;
 import com.dsi.projetgestionpfe.entities.Rapport;
 
 import java.util.List;

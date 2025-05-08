@@ -17,13 +17,8 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class LettreAffectation {
-    @Id
-    private long id;
-    private byte[] contenue;
+public class LettreAffectation extends Document {
     private String nomEntreprise;
-    private LocalDate dateSoumission;
-    private Statut statut;
     @ManyToOne
     @JoinColumn(name = "etudiant_id")
     private Etudiant etudiant;

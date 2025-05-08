@@ -7,21 +7,21 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Feedback {
+public class Document {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
-    private String commentaire;
-    private LocalDate date;
+    private int idDoc;
+    private byte[] contenu;
+    private Statut statut;
+    private LocalDate dateSoumission;
     @ManyToOne
-    @JoinColumn(name = "enseigant_id")
-    private Enseignant enseignant;
-
-
+    @JoinColumn(name = "pfe_id")
+    private Pfe pfe;
 }

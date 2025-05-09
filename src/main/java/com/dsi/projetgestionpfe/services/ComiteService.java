@@ -7,10 +7,10 @@ import java.util.List;
 public interface ComiteService {
     //crud comité
     List<Comite> getComites();
-    Comite getComiteById(long id);
+    Comite getComiteById(int id);
     Comite createComite(Comite comite);
     Comite updateComite(Comite comite);
-    void deleteComite(long id);
+    void deleteComite(int id);
 
 
 }

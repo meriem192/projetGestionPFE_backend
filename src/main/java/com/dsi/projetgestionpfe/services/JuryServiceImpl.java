@@ -1,10 +1,6 @@
 package com.dsi.projetgestionpfe.services;
 
-import com.dsi.projetgestionpfe.entities.Enseignant;
-import com.dsi.projetgestionpfe.entities.EnseignantJury;
 import com.dsi.projetgestionpfe.entities.Jury;
-import com.dsi.projetgestionpfe.entities.Qualificatif;
-import com.dsi.projetgestionpfe.repositories.EnseignantRepository;
 import com.dsi.projetgestionpfe.repositories.JuryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,8 +13,6 @@ public class JuryServiceImpl implements JuryService {
     @Autowired
     private JuryRepository juryRepository;
 
-    @Autowired
-    private EnseignantRepository enseignantRepository;
 
     @Override
     public List<Jury> getAllJury() {
@@ -43,7 +37,6 @@ public class JuryServiceImpl implements JuryService {
         Optional<Jury> optionalJury = juryRepository.findById(jury.getId());
         if (optionalJury.isPresent()) {
             Jury j = optionalJury.get();
-            j.setEnseignantsJury(jury.getEnseignantsJury());
             return juryRepository.save(j);
 
         }

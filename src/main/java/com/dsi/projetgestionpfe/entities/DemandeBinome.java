@@ -19,5 +19,9 @@ public class DemandeBinome {
 
     private LocalDate dateCreation;
 
+    @Column(name = "etudiant_source_id", insertable = false, updatable = false)
+    private int etudiantSourceId;
 
+    @Column(name = "etudiant_cible_id", insertable = false, updatable = false)
+    private int etudiantCibleId;
 }

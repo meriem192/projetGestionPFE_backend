@@ -1,9 +1,7 @@
 package com.dsi.projetgestionpfe.services;
 
 import com.dsi.projetgestionpfe.entities.Comite;
-import com.dsi.projetgestionpfe.entities.Enseignant;
 import com.dsi.projetgestionpfe.repositories.ComiteRepository;
-import com.dsi.projetgestionpfe.repositories.EnseignantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +12,6 @@ import java.util.Optional;
 public class ComiteServiceImpl implements ComiteService{
     @Autowired
     private ComiteRepository comiteRepository;
-    @Autowired
-    private EnseignantRepository enseignantRepository;
 
     @Override
     public List<Comite> getComites() {
@@ -23,7 +19,7 @@ public class ComiteServiceImpl implements ComiteService{
     }
 
     @Override
-    public Comite getComiteById(long id) {
+    public Comite getComiteById(int id) {
         return comiteRepository.findById(id).orElse(null);
     }
 
@@ -60,7 +56,7 @@ public class ComiteServiceImpl implements ComiteService{
     }
 
     @Override
-    public void deleteComite(long id) {
+    public void deleteComite(int id) {
         if (!comiteRepository.existsById(id)) {
             throw new IllegalArgumentException("Le comité avec l'ID " + id + " n'existe pas.");
         }

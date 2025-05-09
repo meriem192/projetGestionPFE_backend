@@ -3,8 +3,7 @@ package com.dsi.projetgestionpfe.services;
 import com.dsi.projetgestionpfe.entities.*;
 import com.dsi.projetgestionpfe.repositories.DemandeEncadrementRepository;
 import com.dsi.projetgestionpfe.repositories.EnseignantRepository;
-import com.dsi.projetgestionpfe.repositories.EtudiantRepository;
-import com.dsi.projetgestionpfe.repositories.RapportRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,15 +16,15 @@ public class EnseignantServiceImpl implements EnseignantService {
     private EnseignantRepository enseignantRepository;
     @Autowired
     private DemandeEncadrementRepository demandeEncadrementRepository;
-    @Autowired
-    private RapportRepository rapportRepository;
-    @Autowired
-    private EtudiantRepository etudiantRepository;
+
 
     @Override
     public List<Enseignant> getEnseignants() {
         return enseignantRepository.findAll();
 
+    }
+    public Enseignant addEnseignant(Enseignant enseignant) {
+        return enseignantRepository.save(enseignant);
     }
 
     @Override
@@ -50,7 +49,6 @@ public class EnseignantServiceImpl implements EnseignantService {
             enseignantToUpdate.setEmail(enseignant.getEmail());
             enseignantToUpdate.setPassword(enseignant.getPassword());
             enseignantToUpdate.setSpecialite(enseignant.getSpecialite());
-            enseignantToUpdate.setComites(enseignant.getComites());
 
             return enseignantRepository.save(enseignantToUpdate);
         } else {
@@ -62,13 +60,10 @@ public class EnseignantServiceImpl implements EnseignantService {
     public void deleteEnseignant(int id) {
         Optional<Enseignant> enseignantOpt = enseignantRepository.findById(id);
         if (enseignantOpt.isPresent()) {
-            // Vérification de l'existence de données associées (ex: rapports ou demandes d'encadrement)
             if (!demandeEncadrementRepository.findByEnseignantId(id).isEmpty()) {
                 throw new IllegalStateException("L'enseignant a des demandes d'encadrement et ne peut pas être supprimé.");
             }
-            if (!rapportRepository.findByEnseignantId(id).isEmpty()) {
-                throw new IllegalStateException("L'enseignant a des rapports et ne peut pas être supprimé.");
-            }
+
 
             enseignantRepository.deleteById(id);
         } else {

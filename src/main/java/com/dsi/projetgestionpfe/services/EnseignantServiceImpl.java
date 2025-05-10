@@ -4,6 +4,7 @@ import com.dsi.projetgestionpfe.entities.*;
 import com.dsi.projetgestionpfe.repositories.DemandeEncadrementRepository;
 import com.dsi.projetgestionpfe.repositories.EnseignantRepository;
 
+import com.dsi.projetgestionpfe.repositories.UtilisateurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,8 @@ public class EnseignantServiceImpl implements EnseignantService {
     private EnseignantRepository enseignantRepository;
     @Autowired
     private DemandeEncadrementRepository demandeEncadrementRepository;
+    @Autowired
+    private UtilisateurRepository utilisateurRepository;
 
 
     @Override
@@ -24,6 +27,9 @@ public class EnseignantServiceImpl implements EnseignantService {
 
     }
     public Enseignant addEnseignant(Enseignant enseignant) {
+        if (utilisateurRepository.findByEmail(enseignant.getEmail()).isPresent()) {
+            throw new IllegalArgumentException("Cet email existe déja");
+        }
         return enseignantRepository.save(enseignant);
     }
 

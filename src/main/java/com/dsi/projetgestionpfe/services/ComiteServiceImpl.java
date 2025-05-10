@@ -33,6 +33,9 @@ public class ComiteServiceImpl implements ComiteService{
         if (comite.getEnseignants() == null) {
             throw new IllegalArgumentException("Un comité doit avoir au moins un enseignant.");
         }
+        if (comiteRepository.findByNom(comite.getNom()).isPresent()) {
+            throw new IllegalArgumentException("Le nom du comité existe déja");
+        }
 
         return comiteRepository.save(comite);    }
 

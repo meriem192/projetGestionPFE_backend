@@ -24,7 +24,6 @@ public class EnseignantServiceImpl implements EnseignantService {
     @Override
     public List<Enseignant> getEnseignants() {
         return enseignantRepository.findAll();
-
     }
     public Enseignant addEnseignant(Enseignant enseignant) {
         if (utilisateurRepository.findByEmail(enseignant.getEmail()).isPresent()) {

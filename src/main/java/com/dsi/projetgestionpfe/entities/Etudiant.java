@@ -24,11 +24,10 @@ public class Etudiant extends Utilisateur{
 
     @OneToMany(mappedBy = "etudiant")
     private List<LettreAffectation> lettres;
-
     @ElementCollection
     @CollectionTable(
-            name = "demandes_binome",
-            joinColumns = @JoinColumn(name = "etudiant_source_id")
+            name = "demandes_binome_source",
+            joinColumns = @JoinColumn(name = "etudiantSource")
     )
     private List<DemandeBinome> demandesBinomeEnvoyees = new ArrayList<>();
 
@@ -36,7 +35,7 @@ public class Etudiant extends Utilisateur{
     @ElementCollection
     @CollectionTable(
             name = "demandes_binome",
-            joinColumns = @JoinColumn(name = "etudiant_cible_id")
+            joinColumns = @JoinColumn(name = "etudiantCible")
     )
     private List<DemandeBinome> demandesBinomeRecues = new ArrayList<>();
 }

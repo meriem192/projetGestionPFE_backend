@@ -1,10 +1,7 @@
 package com.dsi.projetgestionpfe.entities;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,6 +19,8 @@ public class Utilisateur {
     private String nom;
     private String prenom;
     private String email;
+    @Enumerated(EnumType.STRING)
+    private Role role;
     private String password;
 
 

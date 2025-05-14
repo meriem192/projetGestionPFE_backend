@@ -24,6 +24,9 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public Utilisateur addUtilisateur(Utilisateur utilisateur) {
+        if (userRepository.findByEmail(utilisateur.getEmail()).isPresent()) {
+            throw new IllegalArgumentException("Un utilisateur utilise cet email");
+        }
         return userRepository.save(utilisateur);
     }
 

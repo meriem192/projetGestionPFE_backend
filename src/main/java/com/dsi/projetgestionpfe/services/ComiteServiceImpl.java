@@ -1,6 +1,7 @@
 package com.dsi.projetgestionpfe.services;
 
 import com.dsi.projetgestionpfe.entities.Comite;
+import com.dsi.projetgestionpfe.entities.Role;
 import com.dsi.projetgestionpfe.repositories.ComiteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,7 +37,7 @@ public class ComiteServiceImpl implements ComiteService{
         if (comiteRepository.findByNom(comite.getNom()).isPresent()) {
             throw new IllegalArgumentException("Le nom du comité existe déja");
         }
-
+        comite.setRole(Role.Jury);
         return comiteRepository.save(comite);    }
 
     @Override

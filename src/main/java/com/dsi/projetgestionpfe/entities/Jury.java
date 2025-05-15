@@ -18,6 +18,8 @@ public class Jury{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @Enumerated(EnumType.STRING)
+    private Role role;
     @ElementCollection
     @CollectionTable(
             name = "jury_enseignants",

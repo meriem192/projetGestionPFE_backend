@@ -2,6 +2,7 @@ package com.dsi.projetgestionpfe.controllers;
 
 import com.dsi.projetgestionpfe.entities.Utilisateur;
 import com.dsi.projetgestionpfe.services.UserService;
+import org.hibernate.sql.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,5 +26,13 @@ public class UtilisateurController {
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
         }
+    }
+    @PostMapping("/addUser")
+    public Utilisateur addUser(@RequestBody Utilisateur user) {
+        return userService.addUtilisateur(user);
+    }
+    @DeleteMapping("/deleteUser/{id}")
+    public boolean deleteUser(@PathVariable int id) {
+        return userService.deleteUser(id);
     }
 }

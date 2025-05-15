@@ -29,7 +29,7 @@ public class JuryServiceImpl implements JuryService {
         if (jury.getEnseignantsJury().isEmpty()) {
             throw new RuntimeException("Le jury doit contenir au moins un enseignant.");
         }
-
+        
         return juryRepository.save(jury);    }
 
     @Override

@@ -32,7 +32,7 @@ public class LettreAffectationController {
 
     @PutMapping("/updateLettre/{id}")
     public LettreAffectation updateLettre(@PathVariable int id, @RequestBody LettreAffectation lettre) {
-        lettre.setIdDoc(id);
+        lettre.setId(id);
         return lettreService.updateLettreAffectation(lettre);
     }
 

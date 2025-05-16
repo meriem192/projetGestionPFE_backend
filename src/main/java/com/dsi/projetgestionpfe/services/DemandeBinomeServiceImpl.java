@@ -29,7 +29,6 @@ public class DemandeBinomeServiceImpl implements DemandeBinomeService {
         Etudiant cible = etudiantRepository.findById(cibleId)
                 .orElseThrow(() -> new IllegalArgumentException("Étudiant cible non trouvé"));
 
-        // Check if request already exists
         boolean demandeExistante = source.getDemandesBinomeEnvoyees().stream()
                 .anyMatch(d -> d.getEtudiantCibleId() == cibleId);
 

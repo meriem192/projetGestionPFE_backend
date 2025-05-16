@@ -18,6 +18,7 @@ public class Notification {
     private String message;
     @ManyToOne
     private Utilisateur destinataire;
+    private boolean lue;
 
     @ManyToOne
     private Utilisateur emetteur;

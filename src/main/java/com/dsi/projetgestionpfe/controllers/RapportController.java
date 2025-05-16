@@ -32,7 +32,7 @@ public class RapportController {
 
     @PutMapping("/updateRapport/{id}")
     public Rapport updateRapport(@PathVariable int id, @RequestBody Rapport rapport) {
-        rapport.setIdDoc(id);
+        rapport.setId(id);
         return rapportService.updateRapport(rapport);
     }
 

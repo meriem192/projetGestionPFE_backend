@@ -34,7 +34,7 @@ public class CahierDesChargesController {
     public CahierDesCharges updateCahierDesCharges(
             @PathVariable int id,
             @RequestBody CahierDesCharges cahierDesCharges) {
-        cahierDesCharges.setIdDoc(id);
+        cahierDesCharges.setId(id);
         return cahierDesChargesService.updateCahierDesCharges(cahierDesCharges);
     }
 

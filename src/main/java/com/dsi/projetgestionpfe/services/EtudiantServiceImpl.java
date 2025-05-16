@@ -74,14 +74,6 @@ public class EtudiantServiceImpl implements EtudiantService {
         if (etudiantOptional.isPresent()) {
             Etudiant etudiant = etudiantOptional.get();
 
-            if (!etudiant.getRapports().isEmpty()) {
-                throw new IllegalArgumentException("Cet étudiant a des rapports associés et ne peut pas être supprimé.");
-            }
-
-            if (!etudiant.getLettres().isEmpty()) {
-                throw new IllegalArgumentException("Cet étudiant a des lettres d'affectation associées et ne peut pas être supprimé.");
-            }
-
             if (!etudiant.getDemandesBinomeEnvoyees().isEmpty() || !etudiant.getDemandesBinomeRecues().isEmpty()) {
                 throw new IllegalArgumentException("Cet étudiant a des demandes de binôme associées et ne peut pas être supprimé.");
             }

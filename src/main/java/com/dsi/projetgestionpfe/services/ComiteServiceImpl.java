@@ -37,7 +37,6 @@ public class ComiteServiceImpl implements ComiteService{
         if (comiteRepository.findByNom(comite.getNom()).isPresent()) {
             throw new IllegalArgumentException("Le nom du comité existe déja");
         }
-        comite.setRole(Role.Jury);
         return comiteRepository.save(comite);    }
 
     @Override

@@ -31,7 +31,7 @@ public class CahierDesChargesServiceImpl implements CahierDesChargesService {
 
     @Override
     public CahierDesCharges updateCahierDesCharges(CahierDesCharges cahierDesCharges) {
-        Optional<CahierDesCharges> cahierOptional = cahierDesChargesRepository.findById(cahierDesCharges.getIdDoc());
+        Optional<CahierDesCharges> cahierOptional = cahierDesChargesRepository.findById(cahierDesCharges.getId());
         if (cahierOptional.isPresent()) {
             CahierDesCharges cahierToUpdate = cahierOptional.get();
 

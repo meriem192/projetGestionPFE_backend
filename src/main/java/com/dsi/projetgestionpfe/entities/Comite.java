@@ -19,8 +19,7 @@ public class Comite {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String nom;
-    @Enumerated(EnumType.STRING)
-    private Role role;
+
     @ManyToMany
     @JoinTable(
             name = "comite_enseignant",

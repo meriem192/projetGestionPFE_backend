@@ -18,8 +18,7 @@ public class Jury{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @Enumerated(EnumType.STRING)
-    private Role role;
+
     @ElementCollection
     @CollectionTable(
             name = "jury_enseignants",
@@ -27,6 +26,6 @@ public class Jury{
     )
     private List<EnseignantJury> enseignantsJury = new ArrayList<>();
     @OneToMany(mappedBy = "jury")
-    private List<Pfe> pfe;
+    private List<Pfe> pfes;
 
 }

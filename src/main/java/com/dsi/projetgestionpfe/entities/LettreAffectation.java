@@ -19,7 +19,5 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class LettreAffectation extends Document {
     private String nomEntreprise;
-    @ManyToOne
-    @JoinColumn(name = "etudiant_id")
-    private Etudiant etudiant;
+
 }

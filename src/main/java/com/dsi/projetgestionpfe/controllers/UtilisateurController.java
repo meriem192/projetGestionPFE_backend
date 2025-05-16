@@ -15,18 +15,6 @@ public class UtilisateurController {
 
     @Autowired
     private UserService userService;
-
-    @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody Utilisateur loginRequest) {
-        String email = loginRequest.getEmail();
-        String password = loginRequest.getPassword();
-        Utilisateur user = userService.login(email, password);
-        if (user != null) {
-            return ResponseEntity.ok(user);
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
-        }
-    }
     @PostMapping("/addUser")
     public Utilisateur addUser(@RequestBody Utilisateur user) {
         return userService.addUtilisateur(user);

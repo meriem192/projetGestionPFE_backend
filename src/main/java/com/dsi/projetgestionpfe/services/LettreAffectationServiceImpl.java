@@ -30,10 +30,6 @@ public class LettreAffectationServiceImpl implements LettreAffectationService {
             throw new IllegalArgumentException("Le nom de l'entreprise ne peut pas être vide.");
         }
 
-        if (lettreAffectation.getEtudiant() == null) {
-            throw new IllegalArgumentException("Une lettre d'affectation doit être associée à un étudiant.");
-        }
-
         if (lettreAffectation.getPfe() == null) {
             throw new IllegalArgumentException("Une lettre d'affectation doit être associée à un PFE.");
         }
@@ -43,16 +39,12 @@ public class LettreAffectationServiceImpl implements LettreAffectationService {
 
     @Override
     public LettreAffectation updateLettreAffectation(LettreAffectation lettreAffectation) {
-        Optional<LettreAffectation> lettreOptional = lettreAffectationRepository.findById(lettreAffectation.getIdDoc());
+        Optional<LettreAffectation> lettreOptional = lettreAffectationRepository.findById(lettreAffectation.getId());
         if (lettreOptional.isPresent()) {
             LettreAffectation lettreToUpdate = lettreOptional.get();
 
             if (lettreAffectation.getNomEntreprise() == null || lettreAffectation.getNomEntreprise().isEmpty()) {
                 throw new IllegalArgumentException("Le nom de l'entreprise ne peut pas être vide.");
-            }
-
-            if (lettreAffectation.getEtudiant() == null) {
-                throw new IllegalArgumentException("Une lettre d'affectation doit être associée à un étudiant.");
             }
 
             if (lettreAffectation.getPfe() == null) {

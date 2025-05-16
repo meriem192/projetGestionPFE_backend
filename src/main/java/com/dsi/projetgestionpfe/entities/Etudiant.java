@@ -16,14 +16,11 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Etudiant extends Utilisateur{
-    private String niveau;
+    @Enumerated(EnumType.STRING)
+    private Niveau niveau;
     @Enumerated(EnumType.STRING)
     private Parcours parcours;
-    @OneToMany(mappedBy = "etudiant")
-    private List<Rapport> rapports;
 
-    @OneToMany(mappedBy = "etudiant")
-    private List<LettreAffectation> lettres;
     @ElementCollection
     @CollectionTable(
             name = "demandes_binome_source",
@@ -38,4 +35,10 @@ public class Etudiant extends Utilisateur{
             joinColumns = @JoinColumn(name = "etudiantCible")
     )
     private List<DemandeBinome> demandesBinomeRecues = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "pfe_id")
+    private Pfe pfe;
+
+
 }

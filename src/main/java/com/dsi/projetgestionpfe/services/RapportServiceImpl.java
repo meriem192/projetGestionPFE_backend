@@ -30,10 +30,6 @@ public class RapportServiceImpl implements RapportService {
             throw new IllegalArgumentException("Le titre du rapport ne peut pas être vide.");
         }
 
-        if (rapport.getEtudiant() == null) {
-            throw new IllegalArgumentException("Un rapport doit être associé à un étudiant.");
-        }
-
         if (rapport.getNote() < 0 || rapport.getNote() > 20) {
             throw new IllegalArgumentException("La note doit être comprise entre 0 et 20.");
         }
@@ -43,7 +39,7 @@ public class RapportServiceImpl implements RapportService {
 
     @Override
     public Rapport updateRapport(Rapport rapport) {
-        Optional<Rapport> rapportOptional = rapportRepository.findById(rapport.getIdDoc());
+        Optional<Rapport> rapportOptional = rapportRepository.findById(rapport.getId());
         if (rapportOptional.isPresent()) {
             Rapport rapportToUpdate = rapportOptional.get();
 
@@ -51,9 +47,6 @@ public class RapportServiceImpl implements RapportService {
                 throw new IllegalArgumentException("Le titre du rapport ne peut pas être vide.");
             }
 
-            if (rapport.getEtudiant() == null) {
-                throw new IllegalArgumentException("Un rapport doit être associé à un étudiant.");
-            }
 
             if (rapport.getNote() < 0 || rapport.getNote() > 20) {
                 throw new IllegalArgumentException("La note doit être comprise entre 0 et 20.");

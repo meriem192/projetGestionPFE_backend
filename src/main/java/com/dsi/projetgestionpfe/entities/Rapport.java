@@ -16,7 +16,5 @@ public class Rapport extends Document{
     private String titre;
     private double note;
     private String commentaire;
-    @ManyToOne
-    @JoinColumn(name = "etudiant_id")
-    private Etudiant etudiant;
+
 }

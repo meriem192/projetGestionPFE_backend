@@ -18,5 +18,5 @@ import lombok.Setter;
 public class EnseignantJury {
     private Long enseignantId;
     @Enumerated(EnumType.STRING)
-    private Qualificatif qualificateur;
+    private Qualificatif qualificatif;
 }

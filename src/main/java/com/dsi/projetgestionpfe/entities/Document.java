@@ -13,15 +13,17 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Feedback {
+public class Document {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
-    private String commentaire;
-    private LocalDate date;
+    private int id;
     @ManyToOne
-    @JoinColumn(name = "enseigant_id")
-    private Enseignant enseignant;
+    @JoinColumn(name = "pfe_id")
+    private Pfe pfe;
+
+    private LocalDate dateSoumission;
+    private Byte[] contenu;
+    private Statut statut;
 
 
 }

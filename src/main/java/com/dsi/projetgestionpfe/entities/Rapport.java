@@ -12,16 +12,9 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Rapport {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+public class Rapport extends Document{
     private String titre;
-    private byte[] contenu;
-    private LocalDate dateSoumission;
     private double note;
     private String commentaire;
-    @ManyToOne
-    @JoinColumn(name = "etudiant_id")
-    private Etudiant etudiant;
+
 }

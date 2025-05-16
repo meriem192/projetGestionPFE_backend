@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface LettreAffectationRepository extends JpaRepository<LettreAffectation, Long> {
+public interface LettreAffectationRepository extends JpaRepository<LettreAffectation, Integer> {
 }

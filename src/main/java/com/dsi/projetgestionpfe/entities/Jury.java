@@ -17,13 +17,15 @@ import java.util.List;
 public class Jury{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private int id;
+
     @ElementCollection
     @CollectionTable(
             name = "jury_enseignants",
             joinColumns = @JoinColumn(name = "jury_id")
     )
     private List<EnseignantJury> enseignantsJury = new ArrayList<>();
-
+    @OneToMany(mappedBy = "jury")
+    private List<Pfe> pfes;
 
 }

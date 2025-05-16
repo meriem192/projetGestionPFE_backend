@@ -1,9 +1,9 @@
 package com.dsi.projetgestionpfe.repositories;
 
-import com.dsi.projetgestionpfe.entities.Feedback;
+import com.dsi.projetgestionpfe.entities.CahierDesCharges;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface FeedBackRepository extends JpaRepository<Feedback,Long> {
+public interface CahierDesChargesRepository extends JpaRepository<CahierDesCharges, Integer> {
 }
